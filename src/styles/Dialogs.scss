@@ -1,0 +1,102 @@
+.dialogs-wrapper {
+  display: grid;
+  grid-template-columns: 20% auto;
+
+  .dialogs-window {
+    margin-left: 15px;
+    .messages {
+      border: 1px solid #dbdbdb;
+      height: 200px;
+      overflow-y: scroll;
+      padding: 10px;
+      overflow-x: hidden;
+      background-color: #f5f7fa;
+      .block-message {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5px;
+        .friend-message {
+          background-color: #d5eaff;
+          align-self: start;
+          padding: 5px 10px;
+          border-radius: 8px;
+          position: relative;
+          &:before {
+            content: '';
+            position: absolute;
+            left: -21px;
+            bottom: 3px;
+            border: 10px solid transparent;
+            border-right: 13px solid #d5eaff;
+          }
+        }
+        .user-message {
+          background-color: #d5eaff;
+          align-self: flex-end;
+          padding: 5px 10px;
+          border-radius: 8px;
+          position: relative;
+          text-align: right;
+          &:after {
+            content: '';
+            position: absolute;
+            right: -21px;
+            bottom: 3px;
+            border: 10px solid transparent;
+            border-left: 13px solid #d5eaff;
+          }
+        }
+        .date-message {
+          font-size: 10px;
+          font-style: italic;
+          color: #868686;
+          display: block;
+        }
+      }
+    }
+    .dialogs-area {
+      margin: 30px 0;
+    }
+  }
+  .friends-bar {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: auto;
+    .friend-item {
+      margin-bottom: 10px;
+      .dialog-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #222;
+        padding: 5px;
+        &:hover {
+          background-color: #f5f7fa;
+        }
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        .friend-name {
+          margin-left: 10px;
+        }
+      }
+      .dialog-link.active {
+        background-color: #f5f7fa;
+        position: relative;
+        &:before {
+          content: '';
+          width: 2px;
+          height: 100%;
+          position: absolute;
+          background-color: #0288d1;
+          left: 0;
+        }
+      }
+    }
+  }
+
+}

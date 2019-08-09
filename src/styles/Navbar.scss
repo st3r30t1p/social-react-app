@@ -1,0 +1,40 @@
+.app-navbar {
+  grid-area: app-navbar;
+  padding: 15px;
+  border: 1px solid #eeee;
+  background-color: #fff;
+  height: 200px;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+    .app-nav-item {
+      margin: 5px 0;
+      .app-nav-link {
+        color: #222;
+        text-decoration: none;
+        display: block;
+        padding: 15px 10px;
+        &:hover {
+          background-color: #f5f7fa;
+        }
+      }
+      .app-nav-link.active {
+        background-color: #f5f7fa;
+        position: relative;
+        display: block;
+        padding: 15px 10px;
+        &:before {
+          content: '';
+          width: 2px;
+          height: 100%;
+          position: absolute;
+          background-color: #0288d1;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+}
