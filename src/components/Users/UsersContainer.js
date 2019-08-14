@@ -1,14 +1,20 @@
 import React from 'react';
 import Users from "./Users";
 import {connect} from "react-redux";
+import {setUsersAC} from "../../redux-store/reducers/users-reducer";
 
 const mapStateToProps = state => {
-    console.log(state);
-    return {};
+    return {
+        users: state.usersPage.users
+    };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return {
+        setUsers: (users) => {
+            dispatch(setUsersAC(users));
+        }
+    };
 };
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);

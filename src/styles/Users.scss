@@ -1,0 +1,34 @@
+.user-item {
+  display: grid;
+  grid-template-columns: 150px auto minmax(100px, 100px);
+  margin-bottom: 15px;
+  .user-logo-wrap {
+    width: 150px;
+    height: 150px;
+
+    .user-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .user-item-info {
+    padding: 0 15px;
+    span {
+      display: block;
+    }
+    .user-fullname {
+      margin-bottom: 15px;
+    }
+    .user-status,
+    .user-location {
+      margin-bottom: 5px;
+    }
+  }
+  .user-subscribe-btn {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+}
+
