@@ -34,11 +34,11 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const newPostMessageCreator = () => ({
+export const addNewPostMessage = () => ({
     type: ADD_POST
 });
 
-export const addNewMessageBodyCreator = (body) => ({
+export const addNewMessageBody = (body) => ({
     type: NEW_POST_BODY,
     body: body
 });

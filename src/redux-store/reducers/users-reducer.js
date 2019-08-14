@@ -1,7 +1,9 @@
 
-const SUBSCRIBE = 'SUBSCRIBE';
-const UNSUBSCRIBE = 'UNSUBSCRIBE';
-const SET_USERS = 'SET-USERS';
+const SUBSCRIBE = 'SUBSCRIBE',
+      UNSUBSCRIBE = 'UNSUBSCRIBE',
+      SET_USERS = 'SET-USERS',
+      SET_CURRENT_PAGE = 'SET-CURRENT-PAGE',
+      TOTAL_COUNT = 'TOTAL-COUNT';
 
 let initialState = {
     users: [/*
@@ -38,7 +40,10 @@ let initialState = {
             },
             subscribe: true
         }
-    */]
+    */],
+    totalCount: 0,
+    pageCount: 5,
+    currentPage: 1
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -47,25 +52,45 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...action.users]
+                users: action.users
+            };
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            };
+        case TOTAL_COUNT:
+            return {
+                ...state,
+                totalCount: action.totalCount
             };
         default :
             return state;
     }
 };
 
-export const userSubscribeAC = subscribe => ({
-   type: SUBSCRIBE,
-   subscribe: subscribe
+export const userSubscribe = subscribe => ({
+    type: SUBSCRIBE,
+    subscribe
 });
-export const userUnsubscribeAC = subscribe => ({
+export const userUnsubscribe = subscribe => ({
     type: UNSUBSCRIBE,
-    subscribe: subscribe
+    subscribe
 });
 
-export const setUsersAC = users => ({
+export const setUsers = users => ({
     type: SET_USERS,
     users
+});
+
+export const setCurrentPage = currentPage => ({
+    type: SET_CURRENT_PAGE,
+    currentPage
+});
+
+export const setTotalCount = totalCount => ({
+    type: TOTAL_COUNT,
+    totalCount
 });
 
 export default usersReducer;

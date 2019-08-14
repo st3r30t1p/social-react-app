@@ -9,12 +9,12 @@ const ProfilePosts = (props) => {
     });
 
     const onAddNewPost = () => {
-        props.addNewPost();
+        props.addNewPostMessage();
     };
 
     const onChangePostText = (e) => {
         postTextValue = e.target.value;
-        props.changePostText(postTextValue);
+        props.addNewMessageBody(postTextValue);
     };
 
     return (

@@ -48,3 +48,46 @@ body {
     color: #fff;
  }
 }
+.pagination-wrap {
+  margin-bottom: 20px;
+  .current-page {
+    font-weight: 700;
+  }
+  ul.pagination {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      border: 1px solid #dee2e6;
+      margin-left: -1px;
+      a {
+        padding: 5px;
+        vertical-align: text-top;
+        cursor: pointer;
+        display: inline-block;
+        &:hover {
+          background-color: #dbdbdb;
+        }
+      }
+    }
+    .previous {
+      border-top-left-radius: .25rem;
+      border-bottom-left-radius: .25rem;
+    }
+    .next {
+      border-top-right-radius: .25rem;
+      border-bottom-right-radius: .25rem;
+    }
+    .active {
+      font-weight: 700;
+      color: #0288d1;
+    }
+    .disabled {
+      a {
+        cursor: no-drop;
+        color: #868686;
+      }
+    }
+  }
+}
