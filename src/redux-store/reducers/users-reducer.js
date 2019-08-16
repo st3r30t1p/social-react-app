@@ -64,18 +64,30 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 totalCount: action.totalCount
             };
+        case SUBSCRIBE:
+            return {
+            ...state,
+               users: [...state.users.map(user => user.id === action.userId ? {...user, followed: action.subscribe}  : user )]
+            };
+        case UNSUBSCRIBE:
+            return {
+                ...state,
+                users: [...state.users.map(user => user.id === action.userId ? {...user, followed: action.unSubscribe}  : user )]
+            };
         default :
             return state;
     }
 };
 
-export const userSubscribe = subscribe => ({
+export const userSubscribe = (subscribe, userId) => ({
     type: SUBSCRIBE,
-    subscribe
+    subscribe,
+    userId
 });
-export const userUnsubscribe = subscribe => ({
+export const userUnsubscribe = (unSubscribe, userId) => ({
     type: UNSUBSCRIBE,
-    subscribe
+    unSubscribe,
+    userId
 });
 
 export const setUsers = users => ({

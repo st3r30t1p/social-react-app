@@ -6,9 +6,8 @@ import Header from "./Layouts/Header";
 import Navbar from "./Layouts/Navbar";
 import DialogsContainer from "./Dialog/DialogsContainer";
 import UsersContainer from "./Users/UsersContainer";
-//import store from "./../redux-store/redux-store";
 
-function App(props) {
+function App() {
     return (
     <div className="app">
       <Header/>

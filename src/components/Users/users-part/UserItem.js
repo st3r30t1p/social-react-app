@@ -4,11 +4,18 @@ import {NavLink} from "react-router-dom";
 
 const UserItem = (props) => {
 
+    const onUnsubscribeUser = () => {
+      props.userUnsubscribe(false, props.id);
+    };
+    const onSubscribeUser = () => {
+        props.userSubscribe(true, props.id);
+    };
+
     return (
         <div className="user-item">
             <div className="user-logo-wrap">
                 <NavLink to={"profile/"+ props.id}>
-                    <img className="user-logo" src={props.photos.small ? props.photos.small : defaultUser} alt="l"/>
+                   { <img className="user-logo" src={props.photos.small ? props.photos.small : defaultUser} alt="l"/>}
                 </NavLink>
             </div>
             <div className="user-item-info">
@@ -19,8 +26,8 @@ const UserItem = (props) => {
             <div className="user-subscribe-btn">
                 {
                     props.followed ?
-                    <button className="btn-default">Unsubscribe</button> :
-                    <button className="btn-default">Subscribe</button>
+                    <button className="btn-default" onClick={onUnsubscribeUser}>Unsubscribe</button> :
+                    <button className="btn-default" onClick={onSubscribeUser}>Subscribe</button>
                 }
             </div>
         </div>
