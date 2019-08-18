@@ -7,7 +7,7 @@ import UsersContainer from "./Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import HeaderContainer from "./Layouts/HeaderContainer";
 
-function App(props) {
+function App() {
     return (
     <div className="app">
       <HeaderContainer/>

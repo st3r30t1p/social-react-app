@@ -8,7 +8,7 @@ const Users = (props) => {
     const onSetCurrentPage = (currentPage) => {
         let currentPageNumber = currentPage.selected + 1;
         props.setCurrentPage (currentPageNumber);
-        props.getUsers (currentPageNumber)
+        props.getAllUsers (currentPageNumber)
     };
 
     let pagesCount = Math.ceil (props.totalCount / props.pageCount),
@@ -37,7 +37,7 @@ const Users = (props) => {
                 />
             </div>
             {props.users.map (user => {
-                return <UserItem key={user.id} {...user} />
+                return <UserItem key={user.id} {...user} userSubscribe={props.userSubscribe} userUnsubscribe={props.userUnsubscribe} />
             })}
         </div>
     );
