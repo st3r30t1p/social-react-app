@@ -4,7 +4,17 @@
   border: 1px solid #eeee;
   margin-bottom: 15px;
   background-color: #fff;
-  img  {
-    width: 150px;
+  display: grid;
+  grid-template-columns: 150px auto;
+  padding: 15px;
+  .logo {
+    img  {
+      width: 150px;
+    }
+  }
+  .sign-in {
+    display: flex;
+    justify-content:  end;
+    align-items: center;
   }
 }

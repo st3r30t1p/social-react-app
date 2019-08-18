@@ -1,5 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const NEW_POST_BODY = 'ADD-NEW-POST-BODY';
+const ADD_POST = 'ADD-POST',
+      NEW_POST_BODY = 'ADD-NEW-POST-BODY',
+      SET_PROFILE_INFO = 'SET-PROFILE-INFO';
 
 const initialState = {
     posts: [
@@ -8,13 +9,17 @@ const initialState = {
         {id: 3, body: 'How are you?'},
         {id: 4, body: 'You looking awesome'},
     ],
-    newPostText: ''
+    newPostText: '',
+    profileInfo: null
 };
 
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
+            if (state.newPostText.length === 0) {
+                return state;
+            }
             return {
                 ...state,
                 posts: [
@@ -29,6 +34,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText: action.body
             };
+        case SET_PROFILE_INFO:
+            return {
+                ...state,
+                profileInfo: {...action.profileInfo}
+            };
         default:
             return state;
     }
@@ -40,7 +50,12 @@ export const addNewPostMessage = () => ({
 
 export const addNewMessageBody = (body) => ({
     type: NEW_POST_BODY,
-    body: body
+    body
+});
+
+export const setProfileInfo = (profileInfo) => ({
+    type: SET_PROFILE_INFO,
+    profileInfo
 });
 
 export default profileReducer;

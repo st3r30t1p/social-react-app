@@ -19,12 +19,6 @@
     grid-template-columns: 300px 1fr;
     .posts-wrapper {
       grid-column: 2;
-      .add-post {
-        textarea {
-          width: 99%;
-          margin-bottom: 10px;
-        }
-      }
       .posts-list {
         margin-top: 30px;
       }

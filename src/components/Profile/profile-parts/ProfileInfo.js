@@ -1,13 +1,19 @@
 import React from 'react';
-const ProfileInfo = () => {
+import defaultUser from './../../../assets/imgs/default-user.png';
+const ProfileInfo = (props) => {
+
+    //console.log(props);
+    if(!props.profile) {
+        return <>Empty</>
+    }
     return (
         <div className="info-profile">
             <div className="avatar-profile">
-                <img src="https://i.pinimg.com/originals/19/43/18/19431859261e12c5ba63da8f57b776ee.jpg" alt="photo"/>
+                <img src={props.profile.photos.large ? props.profile.photos.large : defaultUser} alt="p"/>
             </div>
             <div className="info">
                 <div className="username">
-                    Jhon Doe
+                    {props.profile.fullName}
                 </div>
                 <div className="block-name">
                     Profile info
@@ -16,10 +22,7 @@ const ProfileInfo = () => {
                     <div>Date of birth: <b>23/12/1992</b></div>
                     <div>City: <b>Las Vegas</b></div>
                     <div>Country: <b>USA</b></div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Est eveniet ex maxime nemo reprehenderit sit veritatis?
-                        Accusamus dolores est, iusto laboriosam,
-                        laudantium minima nesciunt nihil quis rem repellendus sint voluptates!</p>
+                    <p>{props.profile.aboutMe}</p>
                 </div>
             </div>
         </div>

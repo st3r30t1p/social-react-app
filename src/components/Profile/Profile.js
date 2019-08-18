@@ -4,12 +4,12 @@ import ProfileInfo from "./profile-parts/ProfileInfo";
 import ProfilePostsContainer from "./profile-parts/ProfilePostsContainer";
 
 
-const Profile = () => {
+const Profile = (props) => {
 
     return (
         <div className="app-content">
             <div className="profile-content">
-                <ProfileInfo />
+                <ProfileInfo profile={props.profile} />
                 <ProfilePostsContainer />
             </div>
         </div>

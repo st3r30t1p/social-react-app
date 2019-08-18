@@ -13,6 +13,9 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_MESSAGE:
+            if (state.messageText.length === 0) {
+                return state;
+            }
             return {
                 ...state,
                 dialogs: [
