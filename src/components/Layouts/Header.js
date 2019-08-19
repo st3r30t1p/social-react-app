@@ -10,7 +10,7 @@ const Header = () => {
                     alt="logo"/>
             </div>
             <div className="sign-in">
-                <NavLink to="login" >Login</NavLink>
+                <NavLink to="/login" >Login</NavLink>
             </div>
         </header>
     );
