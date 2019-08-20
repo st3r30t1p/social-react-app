@@ -1,14 +1,17 @@
 import React from 'react';
 import defaultUser from './../../../assets/imgs/default-user.png';
 import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../../services/_usersAPI";
 
 const UserItem = (props) => {
 
     const onUnsubscribeUser = () => {
-      props.userUnsubscribe(false, props.id);
+        props.userUnsubscribe (false, props.id);
+        usersAPI.unsubscribe (props.id);
     };
     const onSubscribeUser = () => {
-        props.userSubscribe(true, props.id);
+        props.userSubscribe (true, props.id);
+        usersAPI.subscribe (props.id);
     };
 
     return (

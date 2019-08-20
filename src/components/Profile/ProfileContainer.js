@@ -11,7 +11,7 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if(!userId) {
-            userId = 8;
+            userId = 3;
         }
         usersAPI.getUserById(userId)
             .then (res => {
@@ -28,7 +28,8 @@ class ProfileContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    profile: state.profilePage.profileInfo
+    profile: state.profilePage.profileInfo,
+    authUser: state.authData.data
 });
 const ProfileContainerWithRouter = withRouter(ProfileContainer);
 export default connect(mapStateToProps, {
