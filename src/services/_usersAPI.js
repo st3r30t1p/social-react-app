@@ -13,7 +13,7 @@ export const usersAPI = {
           method: 'POST',
           credentials: 'include',
           headers: {
-              'API-KEY': '8ceb1dca-7bf9-466e-8700-f2ada88c3a18',
+              'API-KEY': '584c6db4-e40f-4182-aad0-fa71322a2044',
           }
       })
     },
@@ -22,12 +22,18 @@ export const usersAPI = {
             method: 'DELETE',
             credentials: 'include',
             headers: {
-                'API-KEY': '8ceb1dca-7bf9-466e-8700-f2ada88c3a18',
+                'API-KEY': '584c6db4-e40f-4182-aad0-fa71322a2044',
             }
         })
     },
     fetchData(urlPart, param = {}) {
         return fetch(`${baseUrl}${urlPart}`, param)
-            .then(response => response.json(), error => console.log(error));
+            .then(response => {
+                if(!response.ok) {
+                    throw new Error('HTTP error, status = ' + response.status);
+                }
+                return response.json();
+
+            });
     }
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import Users from "./Users";
 import {connect} from "react-redux";
 import {
-    setCurrentPage, setTotalCount, setUsers, userSubscribe,
+    setCurrentPage, toggleSubscribingProgress, setTotalCount, setUsers, userSubscribe,
     userUnsubscribe
 } from "../../redux-store/reducers/users-reducer";
 
@@ -32,18 +32,20 @@ class UsersContainer extends React.Component {
                 currentPage={this.props.currentPage}
                 users={this.props.users}
                 userSubscribe={this.props.userSubscribe}
-               userUnsubscribe={this.props.userUnsubscribe}
+                userUnsubscribe={this.props.userUnsubscribe}
+                toggleSubscribingProgress={this.props.toggleSubscribingProgress}
+                toggleElem={this.props.toggleElem}
             />
         );
     }
 }
 const mapStateToProps = state => {
-    console.log(state);
     return {
         users: state.usersPage.users,
         pageCount: state.usersPage.pageCount,
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
+        toggleElem: state.usersPage.toggleElem
     };
 };
 
@@ -53,5 +55,6 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalCount,
     userSubscribe,
-    userUnsubscribe
+    userUnsubscribe,
+    toggleSubscribingProgress
 })(UsersContainer);

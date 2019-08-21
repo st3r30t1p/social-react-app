@@ -37,7 +37,13 @@ const Users = (props) => {
                 />
             </div>
             {props.users.map (user => {
-                return <UserItem key={user.id} {...user} userSubscribe={props.userSubscribe} userUnsubscribe={props.userUnsubscribe} />
+                return <UserItem
+                    key={user.id} {...user}
+                    userSubscribe={props.userSubscribe}
+                    userUnsubscribe={props.userUnsubscribe}
+                    toggleSubscribingProgress={props.toggleSubscribingProgress}
+                    toggleElem={props.toggleElem}
+                />
             })}
         </div>
     );

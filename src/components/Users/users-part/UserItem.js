@@ -6,12 +6,26 @@ import {usersAPI} from "../../../services/_usersAPI";
 const UserItem = (props) => {
 
     const onUnsubscribeUser = () => {
-        props.userUnsubscribe (false, props.id);
-        usersAPI.unsubscribe (props.id);
+        props.toggleSubscribingProgress(true, props.id);
+        usersAPI.unsubscribe(props.id)
+            .then(res => {
+                if(res.resultStatus === 0) {
+                    props.toggleSubscribingProgress(false, props.id);
+                    props.userUnsubscribe(false, props.id);
+                }
+            })
+            .catch(err => console.log(err))
     };
     const onSubscribeUser = () => {
-        props.userSubscribe (true, props.id);
-        usersAPI.subscribe (props.id);
+        props.toggleSubscribingProgress(true, props.id);
+        usersAPI.subscribe(props.id)
+            .then(res => {
+                if(res.resultStatus === 0) {
+                    props.toggleSubscribingProgress(false, props.id);
+                    props.userSubscribe(true, props.id);
+                }
+            })
+            .catch(err => console.log(err))
     };
 
     return (
@@ -29,8 +43,8 @@ const UserItem = (props) => {
             <div className="user-subscribe-btn">
                 {
                     props.followed ?
-                    <button className="btn-default" onClick={onUnsubscribeUser}>Unsubscribe</button> :
-                    <button className="btn-default" onClick={onSubscribeUser}>Subscribe</button>
+                    <button className="btn-default" disabled={props.toggleElem.some(id => id === props.id)} onClick={onUnsubscribeUser}>Unsubscribe</button> :
+                    <button className="btn-default" disabled={props.toggleElem.some(id => id === props.id)} onClick={onSubscribeUser}>Subscribe</button>
                 }
             </div>
         </div>
