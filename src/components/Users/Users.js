@@ -8,7 +8,7 @@ const Users = (props) => {
     const onSetCurrentPage = (currentPage) => {
         let currentPageNumber = currentPage.selected + 1;
         props.setCurrentPage (currentPageNumber);
-        props.getAllUsers (currentPageNumber)
+        props.getAllUsers (currentPageNumber, props.pageCount)
     };
 
     let pagesCount = Math.ceil (props.totalCount / props.pageCount),
@@ -39,10 +39,9 @@ const Users = (props) => {
             {props.users.map (user => {
                 return <UserItem
                     key={user.id} {...user}
-                    userSubscribe={props.userSubscribe}
-                    userUnsubscribe={props.userUnsubscribe}
-                    toggleSubscribingProgress={props.toggleSubscribingProgress}
                     toggleElem={props.toggleElem}
+                    unsubscribeThunk={props.unsubscribeThunk}
+                    subscribeThunk={props.subscribeThunk}
                 />
             })}
         </div>

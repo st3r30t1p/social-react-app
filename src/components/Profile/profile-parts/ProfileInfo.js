@@ -2,7 +2,6 @@ import React from 'react';
 import defaultUser from './../../../assets/imgs/default-user.png';
 const ProfileInfo = (props) => {
 
-    //console.log(props);
     if(!props.profile) {
         return <>Empty</>
     }

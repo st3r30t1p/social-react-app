@@ -9,7 +9,6 @@ const mapStateToProps = (state) => ({
     posts: state.profilePage.posts
 });
 
-
 const ProfilePostsContainer = connect(
     mapStateToProps,
     {

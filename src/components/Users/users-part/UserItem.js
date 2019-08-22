@@ -6,26 +6,10 @@ import {usersAPI} from "../../../services/_usersAPI";
 const UserItem = (props) => {
 
     const onUnsubscribeUser = () => {
-        props.toggleSubscribingProgress(true, props.id);
-        usersAPI.unsubscribe(props.id)
-            .then(res => {
-                if(res.resultStatus === 0) {
-                    props.toggleSubscribingProgress(false, props.id);
-                    props.userUnsubscribe(false, props.id);
-                }
-            })
-            .catch(err => console.log(err))
+        props.unsubscribeThunk(props.id);
     };
     const onSubscribeUser = () => {
-        props.toggleSubscribingProgress(true, props.id);
-        usersAPI.subscribe(props.id)
-            .then(res => {
-                if(res.resultStatus === 0) {
-                    props.toggleSubscribingProgress(false, props.id);
-                    props.userSubscribe(true, props.id);
-                }
-            })
-            .catch(err => console.log(err))
+        props.subscribeThunk(props.id);
     };
 
     return (

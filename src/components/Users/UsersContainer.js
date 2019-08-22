@@ -2,43 +2,32 @@ import React from 'react';
 import Users from "./Users";
 import {connect} from "react-redux";
 import {
-    setCurrentPage, toggleSubscribingProgress, setTotalCount, setUsers, userSubscribe,
-    userUnsubscribe
+    setCurrentPage, getUserThunkCreator, unsubscribeThunk, subscribeThunk
 } from "../../redux-store/reducers/users-reducer";
-
-import {usersAPI} from "../../services/_usersAPI";
 
 class UsersContainer extends React.Component {
 
-    getAllUsers = (currentPage = this.props.currentPage) => {
-        let dataResp = usersAPI.getUsers (currentPage, this.props.pageCount);
-        dataResp.then (res => {
-            this.props.setUsers (res.items);
-            this.props.setTotalCount (res.totalCount);
-        });
-    };
-
     componentDidMount() {
-        this.getAllUsers();
+        this.props.getUserThunkCreator(this.props.currentPage, this.props.pageCount);
     }
 
     render() {
         return (
             <Users
                 setCurrentPage={this.props.setCurrentPage}
-                getAllUsers={this.getAllUsers}
+                getAllUsers={this.props.getUserThunkCreator}
                 totalCount={this.props.totalCount}
                 pageCount={this.props.pageCount}
                 currentPage={this.props.currentPage}
                 users={this.props.users}
-                userSubscribe={this.props.userSubscribe}
-                userUnsubscribe={this.props.userUnsubscribe}
-                toggleSubscribingProgress={this.props.toggleSubscribingProgress}
                 toggleElem={this.props.toggleElem}
+                unsubscribeThunk={this.props.unsubscribeThunk}
+                subscribeThunk={this.props.subscribeThunk}
             />
         );
     }
 }
+
 const mapStateToProps = state => {
     return {
         users: state.usersPage.users,
@@ -49,12 +38,9 @@ const mapStateToProps = state => {
     };
 };
 
-
 export default connect(mapStateToProps, {
-    setUsers,
     setCurrentPage,
-    setTotalCount,
-    userSubscribe,
-    userUnsubscribe,
-    toggleSubscribingProgress
+    getUserThunkCreator,
+    unsubscribeThunk,
+    subscribeThunk
 })(UsersContainer);

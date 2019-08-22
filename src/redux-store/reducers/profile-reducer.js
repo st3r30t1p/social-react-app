@@ -1,3 +1,4 @@
+import {usersAPI} from "../../services/_usersAPI";
 const ADD_POST = 'ADD-POST',
       NEW_POST_BODY = 'ADD-NEW-POST-BODY',
       SET_PROFILE_INFO = 'SET-PROFILE-INFO';
@@ -57,5 +58,17 @@ export const setProfileInfo = (profileInfo) => ({
     type: SET_PROFILE_INFO,
     profileInfo
 });
+
+export const getUserDataThunk = (userID) => {
+    return (dispatch) => {
+        usersAPI.getUserById(userID)
+            .then (res => {
+                dispatch(setProfileInfo (res));
+            })
+            .catch(err => {
+                console.log(err)
+            });
+    }
+};
 
 export default profileReducer;

@@ -1,4 +1,4 @@
-
+import {usersAPI} from "../../services/_usersAPI";
 const SUBSCRIBE = 'SUBSCRIBE',
       UNSUBSCRIBE = 'UNSUBSCRIBE',
       SET_USERS = 'SET-USERS',
@@ -86,5 +86,43 @@ export const toggleSubscribingProgress = (isFetching, id) => ({
     isFetching,
     id
 });
+
+export const subscribeThunk = (id) => {
+    return (dispatch) => {
+        dispatch(toggleSubscribingProgress(true, id));
+        usersAPI.subscribe(id)
+            .then(res => {
+                if(res.resultCode === 0) {
+                    dispatch(toggleSubscribingProgress(false, id));
+                    dispatch(userSubscribe(true, id));
+                }
+            })
+            .catch(err => console.log(err))
+    }
+};
+
+export const unsubscribeThunk = (id) => {
+    return (dispatch) => {
+        dispatch (toggleSubscribingProgress (true, id));
+        usersAPI.unsubscribe (id)
+            .then (res => {
+                if (res.resultCode === 0) {
+                    dispatch (toggleSubscribingProgress (false, id));
+                    dispatch (userUnsubscribe (false, id));
+                }
+            })
+            .catch (err => console.log (err))
+    }
+};
+
+export const getUserThunkCreator = (currentPage, pageCount) => {
+    return (dispatch) => {
+        usersAPI.getUsers (currentPage, pageCount)
+            .then (res => {
+                dispatch(setUsers (res.items));
+                dispatch(setTotalCount (res.totalCount));
+            });
+    }
+};
 
 export default usersReducer;

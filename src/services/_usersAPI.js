@@ -1,6 +1,11 @@
 const baseUrl = 'https://social-network.samuraijs.com/api/1.0/';
 export const usersAPI = {
-    getUsers(currentPage = 1, pageCount = 10) {
+    getAuthUser() {
+        return this.fetchData(`auth/me`, {
+            credentials: 'include'
+        })
+    },
+    getUsers(currentPage, pageCount) {
        return this.fetchData(`users?page=${currentPage}&count=${pageCount}`, {
            credentials: 'include'
        })
@@ -33,7 +38,6 @@ export const usersAPI = {
                     throw new Error('HTTP error, status = ' + response.status);
                 }
                 return response.json();
-
             });
     }
 };
