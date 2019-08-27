@@ -17,17 +17,18 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        return <Profile profile={this.props.profile} />
+        return <Profile profile={this.props.profile} userStatus={this.props.userStatus} />
     }
 }
 
 const mapStateToProps = state => ({
     profile: state.profilePage.profileInfo,
-    authUser: state.authData.data
+    authUser: state.authData.data,
+    userStatus: state.profilePage.userStatus
 });
 
 export default compose (
     connect (mapStateToProps, {getUserDataThunk}),
     withRouter,
-    withAuthRedirect
+    //withAuthRedirect //^
 ) (ProfileContainer);

@@ -1,5 +1,6 @@
 import React from 'react';
 import defaultUser from './../../../assets/imgs/default-user.png';
+import ProfileStatus from "./ProfileStatus";
 const ProfileInfo = (props) => {
 
     if(!props.profile) {
@@ -13,6 +14,9 @@ const ProfileInfo = (props) => {
             <div className="info">
                 <div className="username">
                     {props.profile.fullName}
+                </div>
+                <div>
+                    <ProfileStatus status={props.userStatus} />
                 </div>
                 <div className="block-name">
                     Profile info

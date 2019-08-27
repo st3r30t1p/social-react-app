@@ -1,7 +1,8 @@
 import {usersAPI} from "../../services/_usersAPI";
 const ADD_POST = 'ADD-POST',
       NEW_POST_BODY = 'ADD-NEW-POST-BODY',
-      SET_PROFILE_INFO = 'SET-PROFILE-INFO';
+      SET_PROFILE_INFO = 'SET-PROFILE-INFO',
+      SET_USER_STATUS = 'SET-USER-STATUS';
 
 const initialState = {
     posts: [
@@ -11,7 +12,8 @@ const initialState = {
         {id: 4, body: 'You looking awesome'},
     ],
     newPostText: '',
-    profileInfo: null
+    profileInfo: null,
+    userStatus: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -40,6 +42,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profileInfo: {...action.profileInfo}
             };
+        case SET_USER_STATUS:
+            return {
+                ...state,
+                userStatus: action.status
+            };
         default:
             return state;
     }
@@ -58,12 +65,19 @@ export const setProfileInfo = (profileInfo) => ({
     type: SET_PROFILE_INFO,
     profileInfo
 });
-
+export const setUserStatus = (status) => ({
+    type: SET_USER_STATUS,
+    status
+});
 export const getUserDataThunk = (userID) => {
     return (dispatch) => {
         usersAPI.getUserById(userID)
             .then (res => {
                 dispatch(setProfileInfo (res));
+                usersAPI.getUserStatus(userID)
+                    .then(res => {
+                    dispatch(setUserStatus(res))
+                })
             })
             .catch(err => {
                 console.log(err)

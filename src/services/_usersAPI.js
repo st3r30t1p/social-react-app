@@ -13,6 +13,9 @@ export const usersAPI = {
     getUserById(userId) {
        return this.fetchData(`profile/${userId}`)
     },
+    getUserStatus(userId) {
+        return this.fetchData(`profile/status/${userId}`)
+    },
     subscribe(userId) {
       return this.fetchData(`follow/${userId}`, {
           method: 'POST',
