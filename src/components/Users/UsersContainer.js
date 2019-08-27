@@ -5,6 +5,7 @@ import {
     setCurrentPage, getUserThunkCreator, unsubscribeThunk, subscribeThunk
 } from "../../redux-store/reducers/users-reducer";
 import {withAuthRedirect} from "../hoc/withAuthRediredct";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
 
@@ -39,11 +40,7 @@ const mapStateToProps = state => {
     };
 };
 
-const withAuthRedirectComponent = withAuthRedirect(UsersContainer);
-
-export default connect(mapStateToProps, {
-    setCurrentPage,
-    getUserThunkCreator,
-    unsubscribeThunk,
-    subscribeThunk
-})(withAuthRedirectComponent);
+export default compose(
+    connect(mapStateToProps, {setCurrentPage, getUserThunkCreator, unsubscribeThunk, subscribeThunk}),
+    withAuthRedirect
+)(UsersContainer);
