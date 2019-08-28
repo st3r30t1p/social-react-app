@@ -4,7 +4,8 @@ class ProfileStatus extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            editMode: false
+            editMode: false,
+            status: this.props.status
         };
     }
 
@@ -17,17 +18,28 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false
         });
+        this.props.updateUserStatusThunk(this.state.status);
     };
     onChangeStatus = (e) => {
-      console.log(e.currentTarget.value)
+        this.setState({
+            status: e.currentTarget.value
+        })
     };
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            });
+        }
+    }
 
     render () {
         return (
             <div>
-                {!this.state.editMode && <span onClick={this.onSetStatus}>{this.props.status}</span>}
+                {!this.state.editMode && <span onClick={this.onSetStatus}>{this.props.status || 'not status'}</span>}
                 {this.state.editMode && <div>
-                    <input type="text" autoFocus={true} onBlur={this.onOutStatus} onChange={this.onChangeStatus} value={this.props.status}/>
+                    <input type="text" autoFocus={true} onBlur={this.onOutStatus} onChange={this.onChangeStatus} value={this.state.status}/>
                 </div>}
             </div>
         );

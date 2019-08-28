@@ -13,7 +13,7 @@ const initialState = {
     ],
     newPostText: '',
     profileInfo: null,
-    userStatus: null
+    userStatus: ''
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -81,6 +81,16 @@ export const getUserDataThunk = (userID) => {
             })
             .catch(err => {
                 console.log(err)
+            });
+    }
+};
+export const updateUserStatusThunk = (status) => {
+    return dispatch => {
+        usersAPI.updateUserStatus (status)
+            .then (res => {
+                if(res.resultCode === 0) {
+                    dispatch (setUserStatus (status));
+                }
             });
     }
 };

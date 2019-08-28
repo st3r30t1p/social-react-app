@@ -16,6 +16,17 @@ export const usersAPI = {
     getUserStatus(userId) {
         return this.fetchData(`profile/status/${userId}`)
     },
+    updateUserStatus(status) {
+        return this.fetchData(`profile/status`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {
+                'API-KEY': '584c6db4-e40f-4182-aad0-fa71322a2044',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({status})
+        })
+    },
     subscribe(userId) {
       return this.fetchData(`follow/${userId}`, {
           method: 'POST',
