@@ -1,13 +1,13 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
+import {connect} from "react-redux";
 
-let LoginForm = (props) => {
-
+const LoginForm = (props) => {
     const {handleSubmit} = props;
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <Field name="login" component="input" type="text" placeholder="Login"/>
+                <Field name="email" component="input" type="email" placeholder="Login"/>
             </div>
             <div>
                 <Field name="password" component="input" type="password" placeholder="Password"/>
@@ -22,23 +22,32 @@ let LoginForm = (props) => {
 };
 
 
-const Login = () => {
+const Login = (props) => {
 
-    let handleSubmit = (values) => {
+
+    let onSubmit = (values) => {
         console.log(values);
+    };
+
+    let onChange = (e) => {
+        console.log(e);
     };
 
     return (
     <div className="app-content">
         <h1>Login</h1>
-        <LoginForm handleSubmit={handleSubmit} />
+        <LoginReduxForm onSubmit={onSubmit} onChange={onChange} />
     </div>
     )
 };
 
-LoginForm = reduxForm({
+const LoginReduxForm = reduxForm({
     // a unique name for the form
     form: 'login'
 })(LoginForm);
 
-export default Login;
+const mapStateToProps = (state) => ({
+
+});
+
+export default connect(mapStateToProps, )(Login);

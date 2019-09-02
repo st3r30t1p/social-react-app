@@ -11,7 +11,6 @@ const initialState = {
         {id: 3, body: 'How are you?'},
         {id: 4, body: 'You looking awesome'},
     ],
-    newPostText: '',
     profileInfo: null,
     userStatus: ''
 };
@@ -20,16 +19,15 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
-            if (state.newPostText.length === 0) {
+            if (!action.postMessage) {
                 return state;
             }
             return {
                 ...state,
                 posts: [
                     ...state.posts,
-                    {id: state.posts.slice (-1)[0].id + 1, body: state.newPostText}
-                ],
-                newPostText: ''
+                    {id: state.posts.slice (-1)[0].id + 1, body: action.postMessage}
+                ]
             };
 
         case NEW_POST_BODY:
@@ -52,8 +50,9 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addNewPostMessage = () => ({
-    type: ADD_POST
+export const addNewPostMessage = (postMessage) => ({
+    type: ADD_POST,
+    postMessage
 });
 
 export const addNewMessageBody = (body) => ({

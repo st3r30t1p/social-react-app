@@ -1,20 +1,16 @@
 import React from 'react';
 import PostItem from "./PostItem";
+import {Field, reduxForm} from "redux-form";
 
 const ProfilePosts = (props) => {
-    let postTextValue = props.newPostText;
 
     let postItem = props.posts.map(post => {
       return <PostItem body={post.body} key={post.id}/>
     });
 
-    const onAddNewPost = () => {
-        props.addNewPostMessage();
-    };
 
-    const onChangePostText = (e) => {
-        postTextValue = e.target.value;
-        props.addNewMessageBody(postTextValue);
+    const onSubmit = (value) => {
+        props.addNewPostMessage(value.postMessage);
     };
 
     return (
@@ -24,8 +20,7 @@ const ProfilePosts = (props) => {
                     Posts
                 </div>
                 <div className="add-post">
-                    <textarea className="textarea-default" value={postTextValue} onChange={onChangePostText} placeholder="New post message"/>
-                    <button className="btn-default" onClick={onAddNewPost}>Add Post</button>
+                    <PostReduxFormMessage onSubmit={onSubmit}/>
                 </div>
                 <div className="posts-list">
                     {postItem}
@@ -34,5 +29,20 @@ const ProfilePosts = (props) => {
         </div>
     );
 };
+
+const PostFormMessage = (props) => {
+
+    const {handleSubmit} = props;
+    return (
+        <form onSubmit={handleSubmit}>
+            <Field className="textarea-default" component="textarea" placeholder="New post message" name="postMessage"/>
+            <button className="btn-default">Add message</button>
+        </form>
+    );
+};
+
+const PostReduxFormMessage = reduxForm({
+    form: "postMessage"
+})(PostFormMessage);
 
 export default ProfilePosts;

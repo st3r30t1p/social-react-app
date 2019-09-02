@@ -1,46 +1,34 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const CHANGE_MESSAGE = 'CHANGE-MESSAGE';
 
 let initialState = {
     dialogs: [
         {id: 1, message: 'Hello', who: 'friend'},
         {id: 2, message: 'How are you?', who: 'friend'},
         {id: 3, message: 'Fine', who: 'user'}
-    ],
-    messageText: ''
+    ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_MESSAGE:
-            if (state.messageText.length === 0) {
+            if (!action.message) {
                 return state;
             }
             return {
                 ...state,
                 dialogs: [
                     ...state.dialogs,
-                    {id: state.dialogs.slice(-1)[0].id + 1, message: state.messageText, who: 'user'}
-                ],
-                messageText: ''
-            };
-        case CHANGE_MESSAGE:
-            return {
-                ...state,
-                messageText: action.messageText
+                    {id: state.dialogs.slice(-1)[0].id + 1, message: action.message, who: 'user'}
+                ]
             };
         default:
             return state;
     }
 };
 
-export const addMessage = () => ({
+export const addMessage = (message) => ({
     type: ADD_MESSAGE,
-});
-
-export const changeMessageText = (messageText) => ({
-    type: CHANGE_MESSAGE,
-    messageText: messageText
+    message
 });
 
 export default dialogsReducer;

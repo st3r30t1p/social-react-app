@@ -2,7 +2,7 @@ import React from 'react';
 
 import ProfilePosts from "./ProfilePosts";
 import {connect} from "react-redux";
-import {addNewMessageBody, addNewPostMessage} from "../../../redux-store/reducers/profile-reducer";
+import {addNewPostMessage} from "../../../redux-store/reducers/profile-reducer";
 import {compose} from "redux";
 
 const mapStateToProps = (state) => ({
@@ -11,5 +11,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-    connect(mapStateToProps, {addNewPostMessage, addNewMessageBody})
+    connect(mapStateToProps, {addNewPostMessage})
 )(ProfilePosts)
