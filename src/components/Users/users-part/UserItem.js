@@ -1,7 +1,6 @@
 import React from 'react';
 import defaultUser from './../../../assets/imgs/default-user.png';
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../../services/_usersAPI";
 
 const UserItem = (props) => {
 

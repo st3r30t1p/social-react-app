@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {Input, maxLengthValidator, required} from "../../elements/form/validation";
+import {loginUserThunk} from "../../redux-store/reducers/auth-reducer";
 
 let maxLength = maxLengthValidator(10);
 
@@ -10,7 +11,7 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <Field name="email" component={Input} validate={[required, maxLength]} type="email" placeholder="Email"/>
+                <Field name="email" component={Input} validate={[required]} type="email" placeholder="Email"/>
             </div>
             <div>
                 <Field name="password" component="input" type="password" placeholder="Password"/>
@@ -28,8 +29,11 @@ const LoginForm = (props) => {
 const Login = (props) => {
 
 
-    let onSubmit = (values) => {
-        //console.log(values);
+    let onSubmit = (formData) => {
+
+        console.log(props);
+
+        //props.loginUserThunk(formData.email, formData.password, formData.rememberMe);
     };
 
     let onChange = (e) => {
@@ -53,4 +57,4 @@ const mapStateToProps = (state) => ({
 
 });
 
-export default connect(mapStateToProps, )(Login);
+export default connect(null, loginUserThunk)(Login);

@@ -3,7 +3,6 @@ const SET_AUTH_DATA = 'SET-AUTH-DATA';
 
 let initialState = {
     data: null,
-    resultCode: 1,
     messages: [],
     isAuth: false
 };
@@ -22,9 +21,10 @@ export const authReducer = (state = initialState, action) => {
     }
 };
 
-export let setAuthData = authData => ({
+export let setAuthData = (authData, isAuth) => ({
     type: SET_AUTH_DATA,
-    authData: authData
+    authData: authData,
+    isAuth
 });
 
 export const getAuthUserThunk = () => {
@@ -32,7 +32,37 @@ export const getAuthUserThunk = () => {
         usersAPI.getAuthUser ()
             .then (data => {
                 if (data.resultCode === 0) {
-                    dispatch (setAuthData (data));
+                    dispatch (setAuthData (data, true));
+                }
+            })
+            .catch (error => {
+                console.log (error);
+            })
+    }
+};
+
+export const loginUserThunk = (email, password, rememberMe) => {
+    return (dispatch) => {
+        usersAPI.login (email, password, rememberMe)
+            .then (data => {
+                console.log(data);
+                if (data.resultCode === 0) {
+                    dispatch (getAuthUserThunk ());
+                }
+            })
+            .catch (error => {
+                console.log (error);
+            })
+    }
+};
+
+export const logoutUserThunk = () => {
+    return (dispatch) => {
+        usersAPI.logout()
+            .then (data => {
+                console.log(data);
+                if (data.resultCode === 0) {
+                    dispatch (setAuthData (null, false));
                 }
             })
             .catch (error => {

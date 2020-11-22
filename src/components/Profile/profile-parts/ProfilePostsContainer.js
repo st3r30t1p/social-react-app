@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ProfilePosts from "./ProfilePosts";
 import {connect} from "react-redux";
 import {addNewPostMessage} from "../../../redux-store/reducers/profile-reducer";
