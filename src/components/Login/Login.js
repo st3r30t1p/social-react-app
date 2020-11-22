@@ -11,7 +11,7 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <Field name="email" component={Input} validate={[required]} type="email" placeholder="Email"/>
+                <Field name="email" component={Input} validate={[required, maxLength]} type="email" placeholder="Email"/>
             </div>
             <div>
                 <Field name="password" component="input" type="password" placeholder="Password"/>
@@ -53,8 +53,8 @@ const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm);
 
-const mapStateToProps = (state) => ({
-
-});
+// const mapStateToProps = (state) => ({
+//
+// });
 
 export default connect(null, loginUserThunk)(Login);
